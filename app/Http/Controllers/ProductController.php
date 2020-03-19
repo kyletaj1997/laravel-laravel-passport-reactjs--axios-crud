@@ -10,7 +10,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = auth()->user()->products;
-
+        //
         return response()->json([
             'success' => true,
             'data' => $products
@@ -25,13 +25,13 @@ class ProductController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Product with id ' . $id . ' not found'
-            ], 400);
+            ]);
         }
 
         return response()->json([
             'success' => true,
             'data' => $product->toArray()
-        ], 200);
+        ]);
     }
 
 
@@ -55,7 +55,7 @@ class ProductController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Product could not be added'
-            ], 200);
+            ]);
     }
 
     public function update(Request $request, $id)
@@ -66,7 +66,7 @@ class ProductController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Product with id ' . $id . ' not found'
-            ], 200);
+            ]);
         }
 
         $updated = $product->fill($request->all())->save();
@@ -79,7 +79,7 @@ class ProductController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Product could not be updated'
-            ], 200);
+            ]);
     }
 
     public function destroy($id)
@@ -90,7 +90,7 @@ class ProductController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Product with id ' . $id . ' not found'
-            ], 200);
+            ]);
         }
 
         if ($product->delete()) {
@@ -101,7 +101,7 @@ class ProductController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Product could not be deleted'
-            ], 200);
+            ]);
         }
     }
 }
